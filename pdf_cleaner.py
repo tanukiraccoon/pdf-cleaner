@@ -12,7 +12,7 @@ class PDFCleaner:
         Args:
             show_texts (bool): Show page text if True.
             show_images (bool): Show image info if True.
-            pages (list or None): List of page indices
+            pages (list[int] or None): List of page indices
         Returns:
             dict: A dictionary containing page contents
         """
@@ -57,7 +57,7 @@ class PDFCleaner:
         A tolerance value can be set to allow for slight size differences.
 
         Args:
-            image_sizes (list of tuple): List of (width, height) pairs to remove (in pixels).
+            image_sizes (list[tuple]): List of (width, height) pairs to remove (in pixels).
             tolerance (int): Acceptable pixel deviation (e.g., 3 = ±3 pixels).
         """
         for page in self.doc:
@@ -76,7 +76,7 @@ class PDFCleaner:
         Remove all occurrences of multiple byte strings from PDF content streams.
 
         Args:
-            texts (list): List of strings 
+            texts (list[str]): List of text to remove
         """
         for page in self.doc:
             for xref in page.get_contents():
