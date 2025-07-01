@@ -94,6 +94,17 @@ class PDFCleaner:
         last_page_index = len(self.doc) - 1
         self.doc.delete_page(last_page_index)
 
+    def remove_pages(self, pages):
+        """
+        Remove specific pages from the PDF.
+
+        Args:
+            pages_to_remove (list[int]): List of page numbers to remove.
+        """
+        indexes = sorted([p - 1 for p in pages if 1 <= p <= len(self.doc)], reverse=True)
+        for i in indexes:
+            self.doc.delete_page(i)     
+
     def save(self, output_pdf_path):
         """
         Save the modified PDF document to a new file.
