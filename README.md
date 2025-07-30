@@ -44,7 +44,7 @@ cleaner.remove_images((100, 100), [250, 250], tolerance=2)
 cleaner.remove_texts("Confidential", "Sample")
 
 # Remove all texts
-cleaner.remove_all_texts()
+cleaner.remove_texts()
 
 # Remove last page
 cleaner.remove_last_page()
