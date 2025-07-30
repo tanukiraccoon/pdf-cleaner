@@ -116,12 +116,12 @@ class PDFCleaner:
         if indexes:
             self.doc.delete_pages(indexes)   
 
-    def rotate_pages(self, pages, angle=180):
+    def rotate_pages(self, *pages, angle=180):
         """
         Rotate specific pages in the PDF by a given angle.
 
         Args:
-            pages (list[int]): List of 1-based page numbers to rotate.
+            *pages : 1-based page numbers to rotate.
             angle (int): Rotation angle. Must be one of 0, 90, 180, 270.
         Raises:
             ValueError: If an invalid angle is provided.
