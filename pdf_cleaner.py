@@ -52,13 +52,13 @@ class PDFCleaner:
         
         return {"data": pages_data}
 
-    def remove_images(self, image_sizes, tolerance=0):
+    def remove_images(self, *image_sizes, tolerance=0):
         """
         Remove images that match any of the specified (width, height) pairs across all pages.
         A tolerance value can be set to allow for slight size differences.
 
         Args:
-            image_sizes (list[tuple]): List of (width, height) pairs to remove (in pixels).
+            *image_sizes: Variable number of (width, height) pairs (list or tuple).
             tolerance (int): Acceptable pixel deviation (e.g., 3 = ±3 pixels).
         """
         for page in self.doc:
