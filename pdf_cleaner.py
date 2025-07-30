@@ -72,12 +72,12 @@ class PDFCleaner:
                         page.delete_image(xref)
 
 
-    def remove_texts(self, texts):
+    def remove_texts(self, *texts):
         """
         Remove all occurrences of multiple byte strings from PDF content streams.
 
         Args:
-            texts (list[str]): List of text to remove
+            *texts: Text strings to remove, e.g. remove_texts("Confidential", "Draft", "Sample")
         """
         for page in self.doc:
             for xref in page.get_contents():
