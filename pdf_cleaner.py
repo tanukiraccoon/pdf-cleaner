@@ -12,6 +12,7 @@ class PDFCleaner:
 
         Args:
             *pages (int): 1-based page numbers as separate arguments, e.g. get_page_contents(1, 3, 5).
+                          If none are given, the content of all pages will be retrieved.
             show_texts (bool): Show page text if True.
             show_images (bool): Show image info if True.
         Returns:
@@ -61,6 +62,10 @@ class PDFCleaner:
             *image_sizes (list or tuple): Variable number of (width, height) pairs, e.g. (100, 200), [50, 50].
             tolerance (int): Acceptable pixel deviation (e.g., 3 = ±3 pixels).
         """
+
+        if not image_sizes:
+            raise ValueError("You must specify at least one image size to remove.")
+        
         for page in self.doc:
             images = page.get_images(full=True)
             for img in images:
@@ -78,24 +83,19 @@ class PDFCleaner:
 
         Args:
             *texts (str): Text strings to remove, e.g. remove_texts("Confidential", "Draft", "Sample").
+                          If none are given, all text is removed.
         """
-        for page in self.doc:
-            for xref in page.get_contents():
-                stream = self.doc.xref_stream(xref)
-                new_stream = stream
-                for text in texts:
-                    byte_string = text.encode('utf-8')
-                    new_stream = new_stream.replace(byte_string, b'')
-                self.doc.update_stream(xref, new_stream)
 
-    def remove_all_texts(self):
-        """
-        Remove all text from all pages in the PDF, leaving images and graphics intact.
-        """
         for page in self.doc:
             for xref in page.get_contents():
                 stream = self.doc.xref_stream(xref)
-                new_stream = re.sub(rb"BT.*?ET", b"", stream, flags=re.S)
+                if texts:
+                    new_stream = stream
+                    for text in texts:
+                        byte_string = text.encode('utf-8')
+                        new_stream = new_stream.replace(byte_string, b'')
+                else:
+                    new_stream = re.sub(rb"BT.*?ET", b"", stream, flags=re.S)
                 self.doc.update_stream(xref, new_stream)
 
     def remove_last_page(self):
@@ -126,6 +126,9 @@ class PDFCleaner:
         Raises:
             ValueError: If an invalid angle is provided.
         """
+        if not pages:
+            raise ValueError("No pages specified for rotation.")
+        
         if angle not in [0, 90, 180, 270]:
             raise ValueError("Angle must be 0, 90, 180, or 270 degrees.")
 
