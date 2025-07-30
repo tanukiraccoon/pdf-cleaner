@@ -105,16 +105,16 @@ class PDFCleaner:
         last_page_index = len(self.doc) - 1
         self.doc.delete_page(last_page_index)
 
-    def remove_pages(self, pages):
+    def remove_pages(self, *pages):
         """
         Remove specific pages from the PDF.
 
         Args:
-            pages_to_remove (list[int]): List of page numbers to remove.
+            *pages: Page numbers (1-based) as separate arguments, e.g. remove_pages(1, 3, 5)
         """
-        indexes = sorted([p - 1 for p in pages if 1 <= p <= len(self.doc)], reverse=True)
-        for i in indexes:
-            self.doc.delete_page(i)     
+        indexes = [p - 1 for p in pages if 1 <= p <= len(self.doc)]
+        if indexes:
+            self.doc.delete_pages(indexes)   
 
     def rotate_pages(self, pages, angle=180):
         """
