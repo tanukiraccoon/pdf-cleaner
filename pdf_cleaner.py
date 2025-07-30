@@ -1,4 +1,5 @@
 import fitz
+import re
 
 class PDFCleaner:
     def __init__(self, input_pdf_path):
@@ -85,6 +86,16 @@ class PDFCleaner:
                 for text in texts:
                     byte_string = text.encode('utf-8')
                     new_stream = new_stream.replace(byte_string, b'')
+                self.doc.update_stream(xref, new_stream)
+
+    def remove_all_texts(self):
+        """
+        Remove all text from all pages in the PDF, leaving images and graphics intact.
+        """
+        for page in self.doc:
+            for xref in page.get_contents():
+                stream = self.doc.xref_stream(xref)
+                new_stream = re.sub(rb"BT.*?ET", b"", stream, flags=re.S)
                 self.doc.update_stream(xref, new_stream)
 
     def remove_last_page(self):
