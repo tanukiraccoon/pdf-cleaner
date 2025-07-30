@@ -6,19 +6,19 @@ class PDFCleaner:
          self.input_pdf_path = input_pdf_path
          self.doc = fitz.open(input_pdf_path)
 
-    def get_page_contents(self, show_texts=True, show_images=True, pages=None):
+    def get_page_contents(self, *pages, show_texts=True, show_images=True):
         """
         Print selected contents of specific pages or all pages in the PDF.
 
         Args:
+            *pages (int): Page numbers (1-based) as separate arguments, e.g. get_page_contents(1, 3, 5)
             show_texts (bool): Show page text if True.
             show_images (bool): Show image info if True.
-            pages (list[int] or None): List of page indices
         Returns:
             dict: A dictionary containing page contents
         """
 
-        if pages is not None:
+        if pages:
             target_pages = [p - 1 for p in pages if 1 <= p <= len(self.doc)]
         else:
             target_pages = range(len(self.doc))
