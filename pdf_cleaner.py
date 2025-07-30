@@ -11,7 +11,7 @@ class PDFCleaner:
         Print selected contents of specific pages or all pages in the PDF.
 
         Args:
-            *pages (int): Page numbers (1-based) as separate arguments, e.g. get_page_contents(1, 3, 5)
+            *pages (int): 1-based page numbers as separate arguments, e.g. get_page_contents(1, 3, 5).
             show_texts (bool): Show page text if True.
             show_images (bool): Show image info if True.
         Returns:
@@ -58,7 +58,7 @@ class PDFCleaner:
         A tolerance value can be set to allow for slight size differences.
 
         Args:
-            *image_sizes: Variable number of (width, height) pairs (list or tuple).
+            *image_sizes (list or tuple): Variable number of (width, height) pairs, e.g. (100, 200), [50, 50].
             tolerance (int): Acceptable pixel deviation (e.g., 3 = ±3 pixels).
         """
         for page in self.doc:
@@ -77,7 +77,7 @@ class PDFCleaner:
         Remove all occurrences of multiple byte strings from PDF content streams.
 
         Args:
-            *texts: Text strings to remove, e.g. remove_texts("Confidential", "Draft", "Sample")
+            *texts (str): Text strings to remove, e.g. remove_texts("Confidential", "Draft", "Sample").
         """
         for page in self.doc:
             for xref in page.get_contents():
@@ -110,7 +110,7 @@ class PDFCleaner:
         Remove specific pages from the PDF.
 
         Args:
-            *pages: Page numbers (1-based) as separate arguments, e.g. remove_pages(1, 3, 5)
+            *pages (int): 1-based page numbers as separate arguments, e.g. remove_pages(1, 3, 5).
         """
         indexes = [p - 1 for p in pages if 1 <= p <= len(self.doc)]
         if indexes:
@@ -121,7 +121,7 @@ class PDFCleaner:
         Rotate specific pages in the PDF by a given angle.
 
         Args:
-            *pages : 1-based page numbers to rotate.
+            *pages (int): 1-based page numbers as separate arguments, e.g. rotate_pages(1, 3, 5).
             angle (int): Rotation angle. Must be one of 0, 90, 180, 270.
         Raises:
             ValueError: If an invalid angle is provided.
