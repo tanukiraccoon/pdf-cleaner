@@ -1,0 +1,23 @@
+{
+  "remove_texts": "Remove texts",
+  "remove_images": "Remove images",
+  "remove_pages": "Remove pages",
+  "remove_last": "Remove last page",
+  "rotate_pages": "Rotate pages",
+  "get_contents": "Get page contents",
+  "placeholder_texts": "e.g. Confidential, Simple (comma separated)",
+  "placeholder_images": "e.g. 100x200,50x50 (comma separated)",
+  "placeholder_pages": "e.g. 1,3,5 (comma separated)",
+  "info_texts": "Leave blank to remove all texts, or separate words by commas to remove specific words.",
+  "info_required": "*This field cannot be left blank.",
+  "info_get_content": "Leave blank to get contents from all pages, or separate page numbers by commas to get specific pages.",
+  "angle": "Angle",
+  "run": "Run",
+  "show_images": "show_images",
+  "show_texts": "show_texts",
+  "no_file_selected": "No file selected",
+  "select": "Selected",
+  "select_pdf": "Select file",
+  "clean_pdf": "Run Cleaning",
+  "save_pdf": "Save file"
+}
