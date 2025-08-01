@@ -38,7 +38,7 @@ contents = cleaner.get_page_contents(1, 3, 5, show_texts=True, show_images=True)
 contents = cleaner.get_page_contents(show_texts=True, show_images=True)
 
 # Remove images by size
-cleaner.remove_images((100, 100), [250, 250], tolerance=2)
+cleaner.remove_images("100x100", "250x250", tolerance=2)
 
 # Remove specific texts
 cleaner.remove_texts("Confidential", "Sample")
